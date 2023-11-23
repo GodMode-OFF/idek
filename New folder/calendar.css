@@ -1,0 +1,39 @@
+body {
+    background-color: #333;
+    color: #fff;
+    font-family: Arial, sans-serif;
+}
+button {
+    background-color: #666;
+    border: none;
+    color: #fff;
+    padding: 10px 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    cursor: pointer;
+    border-radius: 12px;
+}
+.monthly-view td {
+    height: 80px;
+}
+.weekly-view td {
+    height: 160px;
+}
+table {
+    width: 100%;
+    color: #fff;
+    border-color: #999;
+}
+th {
+    background-color: #555;
+}
+th:first-child,
+th:last-child {
+    color: red;
+}
+.today {
+    background-color: #8ca3a3;
+}

@@ -1,11 +1,32 @@
+<!-- Toggle button updated -->
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+   <link rel="stylesheet" href="calendar.css">
 </head>
 <body>
-    
+    <h1>WDMCalender</h1>
+    <button id="viewToggleButton" onclick="toggleView()">Weekly View</button>
+    <button onclick="prev()">Prev</button>
+    <button onclick="next()">Next</button>
+    <h2 id="monthAndYear"></h2>
+    <h3 id="currentDate"></h3>
+    <table id="calendar" class="monthly-view">
+        <thead>
+            <tr>
+                <th>Sun</th>
+                <th>Mon</th>
+                <th>Tue</th>
+                <th>Wed</th>
+                <th>Thu</th>
+                <th>Fri</th>
+                <th>Sat</th>
+            </tr>
+        </thead>
+        <tbody id="calendar-body">
+            <!-- Calendar dates will be here -->
+        </tbody>
+    </table>
+    <link rel="stylesheet" href="calendar.js">
 </body>
 </html>

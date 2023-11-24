@@ -5,12 +5,18 @@
    <link rel="stylesheet" href="calendar.css">
 </head>
 <body>
-    <h1>WDMCalender</h1>
-    <button id="viewToggleButton" onclick="toggleView()">Weekly View</button>
-    <button onclick="prev()">Prev</button>
-    <button onclick="next()">Next</button>
-    <h2 id="monthAndYear"></h2>
-    <h3 id="currentDate"></h3>
+    <div class="header">
+        <img src="WDMCalendar.png" alt="Title Image" width="180" height="220">
+        <div>
+            <h2 id="monthAndYear"></h2>
+            <h3 id="currentDate"></h3>
+        </div>
+    </div>
+    <div class="buttons">
+        <button id="viewToggleButton" onclick="toggleView()">Weekly View</button>
+        <button onclick="prev()">Prev</button>
+        <button onclick="next()">Next</button>
+    </div>
     <table id="calendar" class="monthly-view">
         <thead>
             <tr>
@@ -24,7 +30,6 @@
             </tr>
         </thead>
         <tbody id="calendar-body">
-            <!-- Calendar dates will be here -->
         </tbody>
     </table>
     <script src="calendar.js"></script>

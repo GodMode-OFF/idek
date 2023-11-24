@@ -2,6 +2,28 @@ body {
     background-color: #333;
     color: #fff;
     font-family: Arial, sans-serif;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    padding: 20px;
+}
+.header img {
+    height: 100px;
+}
+.header div {
+    text-align: right;
+}
+.buttons {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin-bottom: 20px;
 }
 button {
     background-color: #666;
@@ -18,9 +40,11 @@ button {
 }
 .monthly-view td {
     height: 80px;
+    text-align: center;
 }
 .weekly-view td {
     height: 160px;
+    text-align: center;
 }
 table {
     width: 100%;

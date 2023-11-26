@@ -1,8 +1,8 @@
 var isMonthlyView = true;
-        var date = new Date();
-        var events = {};
-        var months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
-        var days = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
+        var currentDate = new Date();
+        var calendarEvents = {};
+        var monthNames = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+        var dayNames = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
 
         function toggleView() {
             var calendar = document.getElementById('calendar');
@@ -22,10 +22,10 @@ var isMonthlyView = true;
 
         function prev() {
             if (isMonthlyView) {
-                date.setMonth(date.getMonth() - 1);
+                currentDate.setMonth(currentDate.getMonth() - 1);
                 createMonthlyCalendar();
             } else {
-                date.setDate(date.getDate() - 7);
+                currentDate.setDate(currentDate.getDate() - 7);
                 createWeeklyCalendar();
             }
             showCurrentDate();
@@ -33,10 +33,10 @@ var isMonthlyView = true;
 
         function next() {
             if (isMonthlyView) {
-                date.setMonth(date.getMonth() + 1);
+                currentDate.setMonth(currentDate.getMonth() + 1);
                 createMonthlyCalendar();
             } else {
-                date.setDate(date.getDate() + 7);
+                currentDate.setDate(currentDate.getDate() + 7);
                 createWeeklyCalendar();
             }
             showCurrentDate();
@@ -45,12 +45,12 @@ var isMonthlyView = true;
         function createMonthlyCalendar() {
             var calendarBody = document.getElementById('calendar-body');
             calendarBody.innerHTML = '';
-            var month = date.getMonth();
-            var year = date.getFullYear();
+            var month = currentDate.getMonth();
+            var year = currentDate.getFullYear();
             var firstDay = (new Date(year, month)).getDay();
             var daysInMonth = 32 - new Date(year, month, 32).getDate();
 
-            document.getElementById('monthAndYear').innerHTML = months[month] + ' ' + year;
+            document.getElementById('monthAndYear').innerHTML = monthNames[month] + ' ' + year;
 
             var dateToday = 1;
             for (var i = 0; i < 6; i++) {
@@ -65,10 +65,10 @@ var isMonthlyView = true;
                         var cell = document.createElement('td');
                         var cellText = document.createTextNode(dateToday);
                         cell.appendChild(cellText);
-                        if (events[year] && events[year][month] && events[year][month][dateToday]) {
-                            cell.appendChild(document.createTextNode(' ' + events[year][month][dateToday]));
+                        if (calendarEvents[year] && calendarEvents[year][month] && calendarEvents[year][month][dateToday]) {
+                            cell.appendChild(document.createTextNode(' ' + calendarEvents[year][month][dateToday]));
                         }
-                        if (dateToday === date.getDate() && year === date.getFullYear() && month === date.getMonth()) {
+                        if (dateToday === currentDate.getDate() && year === currentDate.getFullYear() && month === currentDate.getMonth()) {
                             cell.className = 'today';
                         }
                         row.appendChild(cell);
@@ -82,24 +82,27 @@ var isMonthlyView = true;
         function createWeeklyCalendar() {
             var calendarBody = document.getElementById('calendar-body');
             calendarBody.innerHTML = '';
-            var day = date.getDay();
-            var dateToday = date.getDate();
+            var day = currentDate.getDay();
+            var dateToday = currentDate.getDate();
             var startOfWeek = dateToday - day;
-            var month = date.getMonth();
-            var year = date.getFullYear();
+            var month = currentDate.getMonth();
+            var year = currentDate.getFullYear();
+            var daysInMonth = 32 - new Date(year, month, 32).getDate();
 
-            document.getElementById('monthAndYear').innerHTML = 'Week of ' + months[month] + ' ' + startOfWeek + ', ' + year;
+            document.getElementById('monthAndYear').innerHTML = 'Week of ' + monthNames[month] + ' ' + startOfWeek + ', ' + year;
 
             var row = document.createElement('tr');
             for (var i = 0; i < 7; i++) {
                 var cell = document.createElement('td');
-                var cellText = document.createTextNode(startOfWeek + i);
-                cell.appendChild(cellText);
-                if (events[year] && events[year][month] && events[year][month][startOfWeek + i]) {
-                    cell.appendChild(document.createTextNode(' ' + events[year][month][startOfWeek + i]));
-                }
-                if (startOfWeek + i === date.getDate() && year === date.getFullYear() && month === date.getMonth()) {
-                    cell.className = 'today';
+                if (startOfWeek + i >= 1 && startOfWeek + i <= daysInMonth) {
+                    var cellText = document.createTextNode(startOfWeek + i);
+                    cell.appendChild(cellText);
+                    if (calendarEvents[year] && calendarEvents[year][month] && calendarEvents[year][month][startOfWeek + i]) {
+                        cell.appendChild(document.createTextNode(' ' + calendarEvents[year][month][startOfWeek + i]));
+                    }
+                    if (startOfWeek + i === currentDate.getDate() && year === currentDate.getFullYear() && month === currentDate.getMonth()) {
+                        cell.className = 'today';
+                    }
                 }
                 row.appendChild(cell);
             }
@@ -107,8 +110,8 @@ var isMonthlyView = true;
         }
 
         function showCurrentDate() {
-            var currentDate = new Date();
-            document.getElementById('currentDate').innerHTML = 'Today is: ' + days[currentDate.getDay()] + ', ' + months[currentDate.getMonth()] + ' ' + currentDate.getDate() + ', ' + currentDate.getFullYear();
+            var today = new Date();
+            document.getElementById('currentDate').innerHTML = 'Today is: ' + dayNames[today.getDay()] + ', ' + monthNames[today.getMonth()] + ' ' + today.getDate() + ', ' + today.getFullYear();
         }
 
         createMonthlyCalendar();
